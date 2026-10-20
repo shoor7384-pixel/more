@@ -1,0 +1,5397 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ELITE ESTATE | إدارة العقارات</title>
+
+    <!-- الخطوط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        /* =========================================================
+           GENERAL
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #080808;
+            --black2: #111111;
+
+            --glass: rgba(30, 32, 34, 0.62);
+            --glass2: rgba(55, 57, 60, 0.38);
+
+            --gray: #9b9b9b;
+            --gray-light: #d8d8d8;
+
+            --gold: #d8b36a;
+            --gold-light: #f3d48b;
+            --gold-dark: #8e6d32;
+
+            --white: #ffffff;
+
+            --border: rgba(255,255,255,.14);
+
+            --shadow:
+                0 20px 60px rgba(0,0,0,.55);
+
+            --transition: .35s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Cairo", sans-serif;
+            color: var(--white);
+            background:
+                linear-gradient(
+                    rgba(4,5,6,.72),
+                    rgba(4,5,6,.86)
+                ),
+                url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=90");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(216,179,106,.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 70%,
+                    rgba(255,255,255,.05),
+                    transparent 30%
+                );
+
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar {
+            position: fixed;
+            top: 18px;
+            left: 3%;
+            right: 3%;
+
+            height: 76px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(100,100,100,.42),
+                    rgba(25,25,25,.62)
+                );
+
+            border: 1px solid rgba(255,255,255,.16);
+
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 45px rgba(0,0,0,.45),
+                inset 0 1px 0 rgba(255,255,255,.08);
+
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            min-width: 220px;
+        }
+
+        .logo-mark {
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            color: var(--gold-light);
+
+            border: 1px solid rgba(216,179,106,.45);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(216,179,106,.18),
+                    rgba(255,255,255,.04)
+                );
+
+            box-shadow:
+                0 0 25px rgba(216,179,106,.14);
+
+            font-size: 20px;
+        }
+
+        .logo-text {
+            line-height: 1.05;
+        }
+
+        .logo-text strong {
+            display: block;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 21px;
+            letter-spacing: 2px;
+
+            color: #fff;
+        }
+
+        .logo-text span {
+            display: block;
+
+            color: #aaa;
+            font-size: 9px;
+
+            letter-spacing: 3px;
+            margin-top: 4px;
+        }
+
+        /* Search */
+
+        .nav-search {
+            width: min(430px, 38vw);
+
+            height: 46px;
+
+            position: relative;
+        }
+
+        .nav-search input {
+            width: 100%;
+            height: 100%;
+
+            border-radius: 14px;
+
+            border: 1px solid rgba(255,255,255,.14);
+
+            outline: none;
+
+            background:
+                rgba(0,0,0,.32);
+
+            color: white;
+
+            padding:
+                0 48px 0 18px;
+
+            transition: var(--transition);
+        }
+
+        .nav-search input::placeholder {
+            color: #999;
+        }
+
+        .nav-search input:focus {
+            border-color: rgba(216,179,106,.65);
+
+            box-shadow:
+                0 0 25px rgba(216,179,106,.13);
+        }
+
+        .search-icon {
+            position: absolute;
+
+            right: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--gold);
+
+            font-size: 18px;
+        }
+
+        /* Nav actions */
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .nav-btn {
+            width: 44px;
+            height: 44px;
+
+            border-radius: 13px;
+
+            border: 1px solid rgba(255,255,255,.12);
+
+            background:
+                rgba(255,255,255,.055);
+
+            color: #ddd;
+
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            color: var(--gold-light);
+
+            border-color:
+                rgba(216,179,106,.5);
+
+            background:
+                rgba(216,179,106,.10);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 25px rgba(216,179,106,.12);
+        }
+
+        /* =========================================================
+           PAGE
+        ========================================================= */
+
+        .page {
+            min-height: 100vh;
+            padding: 135px 5% 70px;
+        }
+
+        .view {
+            display: none;
+            animation: pageIn .5s ease;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes pageIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            min-height: 470px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.1fr
+                .9fr;
+
+            align-items: center;
+
+            gap: 50px;
+
+            margin-bottom: 70px;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero-small {
+            display: inline-flex;
+
+            padding: 8px 17px;
+
+            border-radius: 50px;
+
+            border: 1px solid rgba(216,179,106,.35);
+
+            color: var(--gold-light);
+
+            background:
+                rgba(216,179,106,.07);
+
+            font-size: 13px;
+
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(48px, 6vw, 86px);
+
+            line-height: 1.05;
+
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            color: var(--gold-light);
+
+            text-shadow:
+                0 0 35px rgba(216,179,106,.18);
+        }
+
+        .hero p {
+            max-width: 650px;
+
+            color: #b9b9b9;
+
+            line-height: 2;
+
+            font-size: 16px;
+        }
+
+        .hero-actions {
+            display: flex;
+
+            gap: 14px;
+
+            margin-top: 35px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            min-height: 52px;
+
+            padding: 0 25px;
+
+            border-radius: 14px;
+
+            font-weight: 700;
+
+            transition: var(--transition);
+        }
+
+        .primary-btn {
+            color: #17130b;
+
+            border: 1px solid var(--gold);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--gold-light),
+                    var(--gold)
+                );
+
+            box-shadow:
+                0 10px 35px rgba(216,179,106,.16);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 15px 40px rgba(216,179,106,.27);
+        }
+
+        .secondary-btn {
+            color: white;
+
+            border: 1px solid rgba(255,255,255,.15);
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+        .secondary-btn:hover {
+            border-color:
+                rgba(216,179,106,.45);
+
+            color: var(--gold-light);
+        }
+
+        /* Hero visual */
+
+        .hero-visual {
+            position: relative;
+
+            min-height: 390px;
+
+            border-radius: 35px;
+
+            overflow: hidden;
+
+            border: 1px solid rgba(255,255,255,.15);
+
+            box-shadow:
+                var(--shadow);
+        }
+
+        .hero-visual::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(0,0,0,.8),
+                    transparent 60%
+                );
+
+            z-index: 1;
+        }
+
+        .hero-visual img {
+            width: 100%;
+            height: 100%;
+
+            min-height: 390px;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: 1s ease;
+        }
+
+        .hero-visual:hover img {
+            transform: scale(1.05);
+        }
+
+        .hero-visual-label {
+            position: absolute;
+
+            right: 28px;
+            bottom: 25px;
+
+            z-index: 2;
+        }
+
+        .hero-visual-label small {
+            color: #aaa;
+        }
+
+        .hero-visual-label strong {
+            display: block;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 28px;
+
+            color: var(--gold-light);
+        }
+
+        /* =========================================================
+           SECTION HEADER
+        ========================================================= */
+
+        .section-head {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: end;
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+        }
+
+        .section-head small {
+            display: block;
+
+            color: var(--gold);
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 8px;
+        }
+
+        .section-head h2 {
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(32px, 4vw, 48px);
+        }
+
+        .section-head p {
+            color: #aaa;
+
+            max-width: 500px;
+
+            line-height: 1.9;
+        }
+
+        /* =========================================================
+           AREA CARDS
+        ========================================================= */
+
+        .areas-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .area-card {
+            position: relative;
+
+            min-height: 390px;
+
+            overflow: hidden;
+
+            border-radius: 27px;
+
+            border: 1px solid rgba(255,255,255,.13);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(90,90,90,.28),
+                    rgba(20,20,20,.55)
+                );
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            cursor: pointer;
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,.28);
+
+            transition:
+                transform .45s ease,
+                border-color .45s ease,
+                box-shadow .45s ease;
+        }
+
+        .area-card::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(0,0,0,.95),
+                    rgba(0,0,0,.05) 70%
+                );
+
+            z-index: 1;
+        }
+
+        .area-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 170px;
+            height: 170px;
+
+            left: -80px;
+            top: -80px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(216,179,106,.18);
+
+            filter: blur(45px);
+
+            opacity: 0;
+
+            transition: .5s ease;
+        }
+
+        .area-card:hover {
+            transform:
+                translateY(-12px)
+                scale(1.015);
+
+            border-color:
+                rgba(216,179,106,.62);
+
+            box-shadow:
+                0 30px 70px rgba(0,0,0,.55),
+                0 0 45px rgba(216,179,106,.10);
+        }
+
+        .area-card:hover::after {
+            opacity: 1;
+        }
+
+        .area-image {
+            position: absolute;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            opacity: .48;
+
+            transition: .8s ease;
+        }
+
+        .area-card:hover .area-image {
+            transform: scale(1.09);
+
+            opacity: .65;
+        }
+
+        .area-content {
+            position: absolute;
+
+            right: 25px;
+            left: 25px;
+            bottom: 24px;
+
+            z-index: 2;
+        }
+
+        .area-number {
+            color: var(--gold);
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 8px;
+        }
+
+        .area-content h3 {
+            font-family: "Playfair Display", serif;
+
+            font-size: 34px;
+
+            margin-bottom: 8px;
+        }
+
+        .area-content p {
+            color: #bbb;
+
+            font-size: 13px;
+
+            margin-bottom: 18px;
+        }
+
+        .area-meta {
+            display: flex;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+        }
+
+        .meta-pill {
+            padding: 7px 11px;
+
+            border-radius: 10px;
+
+            color: #ddd;
+
+            background:
+                rgba(255,255,255,.08);
+
+            border:
+                1px solid rgba(255,255,255,.09);
+
+            font-size: 11px;
+        }
+
+        /* =========================================================
+           SEARCH RESULTS
+        ========================================================= */
+
+        .search-results {
+            position: fixed;
+
+            top: 106px;
+
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: min(850px, 90vw);
+
+            max-height: 70vh;
+
+            overflow-y: auto;
+
+            background:
+                rgba(15,15,15,.94);
+
+            backdrop-filter: blur(25px);
+
+            border:
+                1px solid rgba(216,179,106,.30);
+
+            border-radius: 22px;
+
+            padding: 15px;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.65);
+
+            z-index: 900;
+
+            display: none;
+        }
+
+        .search-results.show {
+            display: block;
+        }
+
+        .search-title {
+            padding: 10px 12px 15px;
+
+            color: var(--gold-light);
+
+            font-weight: 700;
+        }
+
+        .search-result {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 14px;
+
+            border-radius: 15px;
+
+            border: 1px solid transparent;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .search-result:hover {
+            background:
+                rgba(216,179,106,.08);
+
+            border-color:
+                rgba(216,179,106,.25);
+        }
+
+        .result-icon {
+            width: 48px;
+            height: 48px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            color: var(--gold-light);
+
+            background:
+                rgba(216,179,106,.09);
+
+            border:
+                1px solid rgba(216,179,106,.2);
+        }
+
+        .result-info strong {
+            display: block;
+
+            color: white;
+
+            margin-bottom: 3px;
+        }
+
+        .result-info span {
+            color: #999;
+
+            font-size: 12px;
+        }
+
+        .no-search {
+            text-align: center;
+
+            color: #999;
+
+            padding: 35px;
+        }
+
+        /* =========================================================
+           INNER PAGES
+        ========================================================= */
+
+        .inner-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-bottom: 35px;
+        }
+
+        .back-btn {
+            border: 1px solid rgba(255,255,255,.13);
+
+            background:
+                rgba(255,255,255,.05);
+
+            color: #ddd;
+
+            border-radius: 12px;
+
+            padding: 11px 18px;
+
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            color: var(--gold-light);
+
+            border-color:
+                rgba(216,179,106,.4);
+        }
+
+        .page-title h1 {
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(38px, 5vw, 62px);
+        }
+
+        .page-title p {
+            color: #999;
+
+            margin-top: 6px;
+        }
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 35px;
+        }
+
+        .stat {
+            padding: 22px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(70,70,70,.23);
+
+            border:
+                1px solid rgba(255,255,255,.11);
+
+            backdrop-filter: blur(12px);
+        }
+
+        .stat span {
+            color: #999;
+
+            font-size: 12px;
+        }
+
+        .stat strong {
+            display: block;
+
+            color: var(--gold-light);
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 32px;
+
+            margin-top: 5px;
+        }
+
+        /* =========================================================
+           SUB AREA CARDS
+        ========================================================= */
+
+        .sub-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .sub-card {
+            position: relative;
+
+            min-height: 230px;
+
+            padding: 28px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(90,90,90,.28),
+                    rgba(20,20,20,.60)
+                );
+
+            border:
+                1px solid rgba(255,255,255,.13);
+
+            backdrop-filter: blur(14px);
+
+            transition: .4s;
+
+            cursor: pointer;
+        }
+
+        .sub-card:hover {
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(216,179,106,.55);
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,.45),
+                0 0 30px rgba(216,179,106,.08);
+        }
+
+        .sub-icon {
+            width: 54px;
+            height: 54px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background:
+                rgba(216,179,106,.08);
+
+            border:
+                1px solid rgba(216,179,106,.25);
+
+            color: var(--gold-light);
+
+            margin-bottom: 22px;
+
+            font-size: 22px;
+        }
+
+        .sub-card h3 {
+            font-size: 23px;
+
+            margin-bottom: 7px;
+        }
+
+        .sub-card p {
+            color: #999;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .sub-card-bottom {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-top: 20px;
+
+            color: var(--gold);
+        }
+
+        .delete-mini {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 9px;
+
+            border:
+                1px solid rgba(255,80,80,.18);
+
+            background:
+                rgba(255,70,70,.06);
+
+            color: #ff8585;
+
+            transition: .3s;
+        }
+
+        .delete-mini:hover {
+            background:
+                rgba(255,70,70,.16);
+        }
+
+        /* =========================================================
+           PROPERTY CARDS
+        ========================================================= */
+
+        .properties-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .property-card {
+            overflow: hidden;
+
+            border-radius: 24px;
+
+            border:
+                1px solid rgba(255,255,255,.12);
+
+            background:
+                rgba(30,30,30,.58);
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 18px 45px rgba(0,0,0,.28);
+
+            transition: .4s;
+        }
+
+        .property-card:hover {
+            transform: translateY(-7px);
+
+            border-color:
+                rgba(216,179,106,.45);
+        }
+
+        .property-image {
+            height: 220px;
+
+            position: relative;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #333,
+                    #111
+                );
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .property-status {
+            position: absolute;
+
+            top: 15px;
+            right: 15px;
+
+            padding: 7px 12px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(0,0,0,.62);
+
+            backdrop-filter: blur(10px);
+
+            border:
+                1px solid rgba(255,255,255,.12);
+
+            color: var(--gold-light);
+
+            font-size: 11px;
+        }
+
+        .property-body {
+            padding: 22px;
+        }
+
+        .property-body h3 {
+            font-size: 21px;
+
+            margin-bottom: 8px;
+        }
+
+        .property-price {
+            color: var(--gold-light);
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            margin-bottom: 15px;
+        }
+
+        .property-info {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin-bottom: 18px;
+        }
+
+        .property-info span {
+            padding: 6px 9px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(255,255,255,.05);
+
+            color: #aaa;
+
+            font-size: 11px;
+        }
+
+        .property-buttons {
+            display: flex;
+
+            gap: 8px;
+        }
+
+        .property-buttons button {
+            flex: 1;
+
+            min-height: 42px;
+
+            border-radius: 11px;
+
+            border:
+                1px solid rgba(255,255,255,.12);
+
+            background:
+                rgba(255,255,255,.05);
+
+            color: #ddd;
+
+            transition: .3s;
+        }
+
+        .property-buttons button:hover {
+            color: var(--gold-light);
+
+            border-color:
+                rgba(216,179,106,.4);
+        }
+
+        .property-buttons .danger:hover {
+            color: #ff8585;
+
+            border-color:
+                rgba(255,80,80,.35);
+        }
+
+        /* =========================================================
+           EMPTY
+        ========================================================= */
+
+        .empty {
+            text-align: center;
+
+            padding: 80px 25px;
+
+            border:
+                1px dashed rgba(255,255,255,.13);
+
+            border-radius: 25px;
+
+            background:
+                rgba(255,255,255,.025);
+        }
+
+        .empty-icon {
+            font-size: 45px;
+
+            color: var(--gold);
+
+            margin-bottom: 15px;
+        }
+
+        .empty h3 {
+            font-size: 23px;
+
+            margin-bottom: 8px;
+        }
+
+        .empty p {
+            color: #888;
+
+            margin-bottom: 20px;
+        }
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,.78);
+
+            backdrop-filter: blur(12px);
+
+            z-index: 2000;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            width: min(1100px, 96vw);
+
+            max-height: 92vh;
+
+            overflow-y: auto;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(47,47,47,.96),
+                    rgba(13,13,13,.97)
+                );
+
+            border:
+                1px solid rgba(216,179,106,.25);
+
+            border-radius: 27px;
+
+            box-shadow:
+                0 40px 100px rgba(0,0,0,.7);
+
+            animation:
+                modalIn .35s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(.95) translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-head {
+            position: sticky;
+
+            top: 0;
+
+            z-index: 5;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 22px 25px;
+
+            background:
+                rgba(18,18,18,.93);
+
+            backdrop-filter: blur(20px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,.08);
+        }
+
+        .modal-head h2 {
+            font-family:
+                "Playfair Display", serif;
+
+            color:
+                var(--gold-light);
+        }
+
+        .close-btn {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 11px;
+
+            border:
+                1px solid rgba(255,255,255,.12);
+
+            background:
+                rgba(255,255,255,.05);
+
+            color: #ddd;
+
+            font-size: 18px;
+        }
+
+        .modal-content {
+            padding: 28px;
+        }
+
+        /* =========================================================
+           FORM
+        ========================================================= */
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section-title {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: var(--gold-light);
+
+            font-size: 18px;
+
+            margin-bottom: 17px;
+
+            padding-bottom: 10px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.08);
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 14px;
+        }
+
+        .field {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            color: #aaa;
+
+            font-size: 12px;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+
+            border:
+                1px solid rgba(255,255,255,.12);
+
+            background:
+                rgba(255,255,255,.045);
+
+            color: white;
+
+            outline: none;
+
+            border-radius: 11px;
+
+            padding: 12px 13px;
+
+            transition: .3s;
+        }
+
+        .field input,
+        .field select {
+            height: 46px;
+        }
+
+        .field textarea {
+            min-height: 110px;
+
+            resize: vertical;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color:
+                rgba(216,179,106,.55);
+
+            box-shadow:
+                0 0 20px rgba(216,179,106,.08);
+        }
+
+        select option {
+            background: #222;
+        }
+
+        .checks {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 10px;
+        }
+
+        .check {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 11px;
+
+            border:
+                1px solid rgba(255,255,255,.08);
+
+            background:
+                rgba(255,255,255,.035);
+
+            border-radius: 10px;
+
+            color: #aaa;
+
+            font-size: 12px;
+        }
+
+        .check input {
+            accent-color:
+                var(--gold);
+        }
+
+        .modal-footer {
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 10px;
+
+            padding: 20px 28px;
+
+            border-top:
+                1px solid rgba(255,255,255,.08);
+        }
+
+        /* =========================================================
+           DETAILS
+        ========================================================= */
+
+        .details-image {
+            width: 100%;
+
+            max-height: 400px;
+
+            object-fit: cover;
+
+            border-radius: 18px;
+
+            margin-bottom: 25px;
+        }
+
+        .details-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+        }
+
+        .detail-item {
+            padding: 13px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,.04);
+
+            border:
+                1px solid rgba(255,255,255,.07);
+        }
+
+        .detail-item small {
+            display: block;
+
+            color: #777;
+
+            font-size: 10px;
+
+            margin-bottom: 4px;
+        }
+
+        .detail-item strong {
+            color: #ddd;
+
+            font-size: 13px;
+        }
+
+        .details-text {
+            padding: 18px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            margin-top: 15px;
+
+            line-height: 1.9;
+
+            color: #aaa;
+        }
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        .toast {
+            position: fixed;
+
+            left: 25px;
+            bottom: 25px;
+
+            padding: 15px 20px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(25,25,25,.95);
+
+            border:
+                1px solid rgba(216,179,106,.35);
+
+            color: #eee;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,.45);
+
+            transform:
+                translateY(120px);
+
+            opacity: 0;
+
+            transition: .4s;
+
+            z-index: 3000;
+        }
+
+        .toast.show {
+            transform:
+                translateY(0);
+
+            opacity: 1;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media(max-width:1100px) {
+
+            .areas-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .properties-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .sub-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .hero {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .hero-visual {
+                min-height: 350px;
+            }
+
+            .nav-search {
+                width: 32vw;
+            }
+
+            .form-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .checks {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+        }
+
+        @media(max-width:750px) {
+
+            .navbar {
+                top: 10px;
+
+                left: 3%;
+                right: 3%;
+
+                height: auto;
+
+                padding: 12px 15px;
+
+                flex-wrap: wrap;
+
+                gap: 10px;
+            }
+
+            .logo {
+                min-width: auto;
+            }
+
+            .nav-search {
+                order: 3;
+
+                width: 100%;
+            }
+
+            .nav-actions {
+                margin-right: auto;
+            }
+
+            .page {
+                padding:
+                    160px 4% 50px;
+            }
+
+            .areas-grid,
+            .properties-grid,
+            .sub-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .stats {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .section-head,
+            .inner-top {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .form-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .field.full {
+                grid-column:
+                    auto;
+            }
+
+            .checks {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .details-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 46px;
+            }
+        }
+
+        @media(max-width:480px) {
+
+            .logo-text strong {
+                font-size: 17px;
+            }
+
+            .logo-text span {
+                font-size: 7px;
+            }
+
+            .nav-btn {
+                width: 39px;
+                height: 39px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .checks {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .details-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .modal {
+                padding: 8px;
+            }
+
+            .modal-content {
+                padding: 18px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         NAVBAR
+    ========================================================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <div class="logo-mark">
+                ◈
+            </div>
+
+            <div class="logo-text">
+                <strong>ELITE ESTATE</strong>
+                <span>REAL ESTATE MANAGEMENT</span>
+            </div>
+
+        </div>
+
+
+        <!-- البحث -->
+
+        <div class="nav-search">
+
+            <span class="search-icon">
+                ⌕
+            </span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="ابحث عن شقة، عقار، منطقة..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div class="nav-actions">
+
+            <button
+                class="nav-btn"
+                onclick="goHome()"
+                title="الرئيسية">
+                ⌂
+            </button>
+
+            <button
+                class="nav-btn"
+                onclick="openMainAddModal()"
+                title="إضافة منطقة">
+                ＋
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================================
+         SEARCH RESULTS
+    ========================================================= -->
+
+    <div
+        class="search-results"
+        id="searchResults">
+    </div>
+
+
+    <!-- =========================================================
+         PAGE
+    ========================================================= -->
+
+    <main class="page">
+
+
+        <!-- =====================================================
+             HOME
+        ===================================================== -->
+
+        <section
+            class="view active"
+            id="homeView">
+
+
+            <div class="hero">
+
+                <div class="hero-content">
+
+                    <div class="hero-small">
+                        ✦ منصة إدارة العقارات
+                    </div>
+
+                    <h1>
+                        امتلك
+                        <span>المكان</span>
+                        الذي تستحقه
+                    </h1>
+
+                    <p>
+                        نظام راقٍ لإدارة المناطق والعقارات والشقق
+                        بطريقة منظمة وفخمة وسهلة الاستخدام.
+                        ابحث عن أي عقار تحتاجه في ثوانٍ،
+                        أو أضف عقارًا جديدًا بكل تفاصيله.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <button
+                            class="primary-btn"
+                            onclick="document.getElementById('areasSection').scrollIntoView({behavior:'smooth'})">
+
+                            استكشف المناطق
+                        </button>
+
+                        <button
+                            class="secondary-btn"
+                            onclick="openMainAddModal()">
+
+                            + إضافة منطقة
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-visual">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=90"
+                        alt="Luxury Property">
+
+                    <div class="hero-visual-label">
+
+                        <small>
+                            PREMIUM PROPERTIES
+                        </small>
+
+                        <strong>
+                            Luxury Living
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- المناطق -->
+
+            <div id="areasSection">
+
+                <div class="section-head">
+
+                    <div>
+
+                        <small>
+                            EXPLORE AREAS
+                        </small>
+
+                        <h2>
+                            المناطق الرئيسية
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="areas-grid"
+                    id="areasGrid">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             MAIN AREA VIEW
+        ===================================================== -->
+
+        <section
+            class="view"
+            id="mainAreaView">
+
+            <div class="inner-top">
+
+                <div class="page-title">
+
+                    <h1 id="mainAreaTitle">
+                        المنطقة
+                    </h1>
+
+                    <p id="mainAreaDescription">
+                    </p>
+
+                </div>
+
+                <button
+                    class="back-btn"
+                    onclick="goHome()">
+                    ← العودة للرئيسية
+                </button>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <span>
+                        المناطق الفرعية
+                    </span>
+
+                    <strong id="subCount">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="stat">
+
+                    <span>
+                        عدد العقارات
+                    </span>
+
+                    <strong id="mainPropertyCount">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="stat">
+
+                    <span>
+                        آخر تحديث
+                    </span>
+
+                    <strong>
+                        الآن
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="section-head">
+
+                <div>
+
+                    <small>
+                        SUB AREAS
+                    </small>
+
+                    <h2>
+                        المناطق الفرعية
+                    </h2>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="openSubModal()">
+                    + إضافة منطقة فرعية
+                </button>
+
+            </div>
+
+
+            <div
+                class="sub-grid"
+                id="subAreasGrid">
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SUB AREA VIEW
+        ===================================================== -->
+
+        <section
+            class="view"
+            id="subAreaView">
+
+            <div class="inner-top">
+
+                <div class="page-title">
+
+                    <h1 id="subAreaTitle">
+                        المنطقة الفرعية
+                    </h1>
+
+                    <p id="subAreaDescription">
+                    </p>
+
+                </div>
+
+                <button
+                    class="back-btn"
+                    onclick="backToMainArea()">
+                    ← العودة للمنطقة
+                </button>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <span>
+                        اسم المنطقة
+                    </span>
+
+                    <strong
+                        id="subAreaStatName">
+                        —
+                    </strong>
+
+                </div>
+
+                <div class="stat">
+
+                    <span>
+                        عدد العقارات
+                    </span>
+
+                    <strong
+                        id="subPropertyCount">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="stat">
+
+                    <span>
+                        الحالة
+                    </span>
+
+                    <strong>
+                        نشطة
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="section-head">
+
+                <div>
+
+                    <small>
+                        PROPERTIES
+                    </small>
+
+                    <h2>
+                        العقارات والشقق
+                    </h2>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="openPropertyModal()">
+                    + إضافة عقار
+                </button>
+
+            </div>
+
+
+            <div
+                class="properties-grid"
+                id="propertiesGrid">
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         ADD MAIN AREA MODAL
+    ========================================================= -->
+
+    <div
+        class="modal"
+        id="mainModal">
+
+        <div
+            class="modal-box"
+            style="max-width:650px;">
+
+            <div class="modal-head">
+
+                <h2>
+                    إضافة منطقة رئيسية
+                </h2>
+
+                <button
+                    class="close-btn"
+                    onclick="closeModal('mainModal')">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="modal-content">
+
+                <div class="form-grid">
+
+                    <div class="field full">
+
+                        <label>
+                            اسم المنطقة *
+                        </label>
+
+                        <input
+                            id="mainName"
+                            placeholder="مثال: المسلة">
+
+                    </div>
+
+                    <div class="field full">
+
+                        <label>
+                            وصف المنطقة
+                        </label>
+
+                        <textarea
+                            id="mainDescription"
+                            placeholder="اكتبي وصفًا بسيطًا للمنطقة..."></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="secondary-btn"
+                    onclick="closeModal('mainModal')">
+                    إلغاء
+                </button>
+
+                <button
+                    class="primary-btn"
+                    onclick="saveMainArea()">
+                    حفظ المنطقة
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         ADD SUB AREA MODAL
+    ========================================================= -->
+
+    <div
+        class="modal"
+        id="subModal">
+
+        <div
+            class="modal-box"
+            style="max-width:650px;">
+
+            <div class="modal-head">
+
+                <h2>
+                    إضافة منطقة فرعية
+                </h2>
+
+                <button
+                    class="close-btn"
+                    onclick="closeModal('subModal')">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="modal-content">
+
+                <div class="form-grid">
+
+                    <div class="field full">
+
+                        <label>
+                            اسم المنطقة الفرعية *
+                        </label>
+
+                        <input
+                            id="subName"
+                            placeholder="مثال: مساكن بنك">
+
+                    </div>
+
+                    <div class="field full">
+
+                        <label>
+                            وصف المنطقة
+                        </label>
+
+                        <textarea
+                            id="subDescription"
+                            placeholder="مثال: منطقة مساكن البنك داخل كيمان..."></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="secondary-btn"
+                    onclick="closeModal('subModal')">
+                    إلغاء
+                </button>
+
+                <button
+                    class="primary-btn"
+                    onclick="saveSubArea()">
+                    حفظ المنطقة
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         PROPERTY MODAL
+    ========================================================= -->
+
+    <div
+        class="modal"
+        id="propertyModal">
+
+        <div class="modal-box">
+
+            <div class="modal-head">
+
+                <h2>
+                    إضافة عقار جديد
+                </h2>
+
+                <button
+                    class="close-btn"
+                    onclick="closeModal('propertyModal')">
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="modal-content">
+
+                <form id="propertyForm">
+
+
+                    <!-- BASIC -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            ◆ البيانات الأساسية
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="field full">
+
+                                <label>
+                                    اسم العقار / عنوان الإعلان *
+                                </label>
+
+                                <input
+                                    id="p_title"
+                                    required
+                                    placeholder="مثال: شقة فاخرة للبيع في مساكن بنك">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    نوع العقار
+                                </label>
+
+                                <select id="p_type">
+
+                                    <option value="">
+                                        اختر
+                                    </option>
+
+                                    <option>
+                                        شقة
+                                    </option>
+
+                                    <option>
+                                        دوبلكس
+                                    </option>
+
+                                    <option>
+                                        بنتهاوس
+                                    </option>
+
+                                    <option>
+                                        فيلا
+                                    </option>
+
+                                    <option>
+                                        محل
+                                    </option>
+
+                                    <option>
+                                        مكتب
+                                    </option>
+
+                                    <option>
+                                        أرض
+                                    </option>
+
+                                    <option>
+                                        عمارة
+                                    </option>
+
+                                    <option>
+                                        استوديو
+                                    </option>
+
+                                    <option>
+                                        شاليه
+                                    </option>
+
+                                    <option>
+                                        أخرى
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    الغرض
+                                </label>
+
+                                <select id="p_purpose">
+
+                                    <option value="">
+                                        اختر
+                                    </option>
+
+                                    <option>
+                                        للبيع
+                                    </option>
+
+                                    <option>
+                                        للإيجار
+                                    </option>
+
+                                    <option>
+                                        استثمار
+                                    </option>
+
+                                    <option>
+                                        إداري
+                                    </option>
+
+                                    <option>
+                                        تجاري
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    حالة العقار
+                                </label>
+
+                                <select id="p_status">
+
+                                    <option value="">
+                                        اختر
+                                    </option>
+
+                                    <option>
+                                        متاح
+                                    </option>
+
+                                    <option>
+                                        محجوز
+                                    </option>
+
+                                    <option>
+                                        مباع
+                                    </option>
+
+                                    <option>
+                                        مؤجر
+                                    </option>
+
+                                    <option>
+                                        تحت الإنشاء
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MONEY -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            ◆ البيانات المالية
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="field">
+
+                                <label>
+                                    السعر
+                                </label>
+
+                                <input
+                                    id="p_price"
+                                    type="number"
+                                    placeholder="مثال: 1500000">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    السعر لكل متر
+                                </label>
+
+                                <input
+                                    id="p_meterPrice"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    الإيجار الشهري
+                                </label>
+
+                                <input
+                                    id="p_rent"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    مقدم الحجز
+                                </label>
+
+                                <input
+                                    id="p_deposit"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    طريقة الدفع
+                                </label>
+
+                                <input
+                                    id="p_payment"
+                                    placeholder="كاش / تقسيط / مقدم...">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    قابل للتفاوض
+                                </label>
+
+                                <select id="p_negotiable">
+
+                                    <option value="">
+                                        —
+                                    </option>
+
+                                    <option>
+                                        نعم
+                                    </option>
+
+                                    <option>
+                                        لا
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SPACE -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            ◆ تفاصيل الشقة والمساحات
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="field">
+
+                                <label>
+                                    المساحة الإجمالية بالمتر
+                                </label>
+
+                                <input
+                                    id="p_area"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    مساحة الأرض
+                                </label>
+
+                                <input
+                                    id="p_land"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    غرف النوم
+                                </label>
+
+                                <input
+                                    id="p_bedrooms"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    الحمامات
+                                </label>
+
+                                <input
+                                    id="p_bathrooms"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    غرف الريسبشن
+                                </label>
+
+                                <input
+                                    id="p_reception"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    المطابخ
+                                </label>
+
+                                <input
+                                    id="p_kitchens"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    البلكونات
+                                </label>
+
+                                <input
+                                    id="p_balconies"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    غرف التخزين
+                                </label>
+
+                                <input
+                                    id="p_storage"
+                                    type="number">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUILDING -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            ◆ تفاصيل المبنى
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="field">
+
+                                <label>
+                                    رقم الدور
+                                </label>
+
+                                <input
+                                    id="p_floor"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    عدد أدوار المبنى
+                                </label>
+
+                                <input
+                                    id="p_buildingFloors"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    سنة البناء
+                                </label>
+
+                                <input
+                                    id="p_year"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    عدد الشقق في الدور
+                                </label>
+
+                                <input
+                                    id="p_unitsPerFloor"
+                                    type="number">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    حالة التشطيب
+                                </label>
+
+                                <select id="p_finish">
+
+                                    <option value="">
+                                        اختر
+                                    </option>
+
+                                    <option>
+                                        سوبر لوكس
+                                    </option>
+
+                                    <option>
+                                        لوكس
+                                    </option>
+
+                                    <option>
+                                        نصف تشطيب
+                                    </option>
+
+                                    <option>
+                                        على الطوب
+                                    </option>
+
+                                    <option>
+                                        مفروش
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    اتجاه العقار
+                                </label>
+
+                                <select id="p_direction">
+
+                                    <option value="">
+                                        اختر
+                                    </option>
+
+                                    <option>
+                                        بحري
+                                    </option>
+
+                                    <option>
+                                        قبلي
+                                    </option>
+
+                                    <option>
+                                        شرقي
+                                    </option>
+
+                                    <option>
+                                        غربي
+                                    </option>
+
+                                    <option>
+                                        بحري شرقي
+                                    </option>
+
+                                    <option>
+                                        بحري غربي
+                                    </option>
+
+                                    <option>
+                                        قبلي شرقي
+                                    </option>
+
+                                    <option>
+                                        قبلي غربي
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURES -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            ◆ المميزات والخدمات
+                        </div>
+
+                        <div class="checks">
+
+                            <label class="check">
+                                <input type="checkbox" id="f_elevator">
+                                أسانسير
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_parking">
+                                جراج
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_balcony">
+                                بلكونة
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_security">
+                                أمن وحراسة
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_camera">
+                                كاميرات
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_gas">
+                                غاز طبيعي
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_water">
+                                مياه
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_electric">
+                                عداد كهرباء
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_meter">
+                                عداد مياه
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_internet">
+                                إنترنت
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_ac">
+                                تكييف
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_furnished">
+                                مفروش
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_roof">
+                                روف
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_garden">
+                                حديقة
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_pool">
+                                حمام سباحة
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" id="f_club">
+                                نادي
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            ◆ الموقع والعنوان
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="field full">
+
+                                <label>
+                                    العنوان بالتفصيل
+                                </label>
+
+                                <textarea
+                                    id="p_address"
+                                    placeholder="العنوان الكامل..."></textarea>
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    اسم الشارع
+                                </label>
+
+                                <input
+                                    id="p_street">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    رقم العمارة
+                                </label>
+
+                                <input
+                                    id="p_buildingNumber">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    رقم الشقة
+                                </label>
+
+                                <input
+                                    id="p_apartmentNumber">
+
+                            </div>
+
+                            <div class="field full">
+
+                                <label>
+                                    أقرب معلم
+                                </label>
+
+                                <input
+                                    id="p_landmark"
+                                    placeholder="مثال: بالقرب من مدرسة...">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONTACT -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            ◆ بيانات المالك / المسؤول
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="field">
+
+                                <label>
+                                    اسم المالك / المسؤول
+                                </label>
+
+                                <input
+                                    id="p_owner">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    رقم الهاتف
+                                </label>
+
+                                <input
+                                    id="p_phone">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    رقم واتساب
+                                </label>
+
+                                <input
+                                    id="p_whatsapp">
+
+                            </div>
+
+                            <div class="field">
+
+                                <label>
+                                    هاتف إضافي
+                                </label>
+
+                                <input
+                                    id="p_phone2">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            ◆ الوصف والملاحظات
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="field full">
+
+                                <label>
+                                    وصف تفصيلي للعقار
+                                </label>
+
+                                <textarea
+                                    id="p_description"
+                                    placeholder="اكتبي كل تفاصيل الشقة..."></textarea>
+
+                            </div>
+
+                            <div class="field full">
+
+                                <label>
+                                    أهم المميزات
+                                </label>
+
+                                <textarea
+                                    id="p_advantages"
+                                    placeholder="مثال: إطلالة ممتازة، تهوية جيدة..."></textarea>
+
+                            </div>
+
+                            <div class="field full">
+
+                                <label>
+                                    ملاحظات / عيوب
+                                </label>
+
+                                <textarea
+                                    id="p_notes"></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MEDIA -->
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            ◆ الصور والفيديو
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="field full">
+
+                                <label>
+                                    رابط الصورة الرئيسية
+                                </label>
+
+                                <input
+                                    id="p_image"
+                                    placeholder="https://...">
+
+                            </div>
+
+                            <div class="field full">
+
+                                <label>
+                                    رابط فيديو العقار
+                                </label>
+
+                                <input
+                                    id="p_video"
+                                    placeholder="https://...">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    class="secondary-btn"
+                    onclick="closeModal('propertyModal')">
+                    إلغاء
+                </button>
+
+                <button
+                    class="primary-btn"
+                    onclick="saveProperty()">
+                    حفظ العقار
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         DETAILS MODAL
+    ========================================================= -->
+
+    <div
+        class="modal"
+        id="detailsModal">
+
+        <div class="modal-box">
+
+            <div class="modal-head">
+
+                <h2 id="detailsTitle">
+                    تفاصيل العقار
+                </h2>
+
+                <button
+                    class="close-btn"
+                    onclick="closeModal('detailsModal')">
+                    ×
+                </button>
+
+            </div>
+
+            <div
+                class="modal-content"
+                id="detailsContent">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOAST -->
+
+    <div
+        class="toast"
+        id="toast">
+    </div>
+
+
+    <script>
+
+        /* =========================================================
+           DATA
+        ========================================================= */
+
+        const defaultData = [
+
+            {
+                id: "main_1",
+                name: "المسلة",
+                description: "منطقة المسلة",
+                image:
+                    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85",
+                subAreas: []
+            },
+
+            {
+                id: "main_2",
+                name: "عبودي",
+                description: "منطقة عبودي",
+                image:
+                    "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1000&q=85",
+                subAreas: []
+            },
+
+            {
+                id: "main_3",
+                name: "دلة",
+                description: "منطقة دلة",
+                image:
+                    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=85",
+                subAreas: []
+            },
+
+            {
+                id: "main_4",
+                name: "كيمان",
+                description: "منطقة كيمان",
+                image:
+                    "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1000&q=85",
+                subAreas: []
+            }
+
+        ];
+
+
+        let data =
+            JSON.parse(
+                localStorage.getItem("eliteEstateData")
+            ) || defaultData;
+
+
+        let currentMainId = null;
+
+        let currentSubId = null;
+
+
+        /* =========================================================
+           SAVE DATA
+        ========================================================= */
+
+        function saveData() {
+
+            localStorage.setItem(
+                "eliteEstateData",
+                JSON.stringify(data)
+            );
+
+        }
+
+
+        /* =========================================================
+           ESCAPE HTML
+        ========================================================= */
+
+        function escapeHTML(value) {
+
+            if (value === null ||
+                value === undefined) {
+                return "";
+            }
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        /* =========================================================
+           FORMAT PRICE
+        ========================================================= */
+
+        function formatPrice(value) {
+
+            if (!value) {
+                return "السعر غير محدد";
+            }
+
+            return Number(value).toLocaleString("ar-EG")
+                + " جنيه";
+
+        }
+
+
+        /* =========================================================
+           HOME
+        ========================================================= */
+
+        function goHome() {
+
+            hideViews();
+
+            document
+                .getElementById("homeView")
+                .classList.add("active");
+
+            currentMainId = null;
+            currentSubId = null;
+
+            renderAreas();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function hideViews() {
+
+            document
+                .querySelectorAll(".view")
+                .forEach(view => {
+
+                    view.classList.remove("active");
+
+                });
+
+        }
+
+
+        /* =========================================================
+           RENDER MAIN AREAS
+        ========================================================= */
+
+        function renderAreas() {
+
+            const grid =
+                document.getElementById("areasGrid");
+
+            grid.innerHTML = "";
+
+            data.forEach((area, index) => {
+
+                let propertyCount = 0;
+
+                area.subAreas.forEach(sub => {
+
+                    propertyCount +=
+                        sub.properties.length;
+
+                });
+
+                grid.innerHTML += `
+
+                    <article
+                        class="area-card"
+                        onclick="openMainArea('${area.id}')">
+
+                        <img
+                            class="area-image"
+                            src="${escapeHTML(area.image)}"
+                            alt="${escapeHTML(area.name)}">
+
+                        <div class="area-content">
+
+                            <div class="area-number">
+                                0${index + 1} / AREA
+                            </div>
+
+                            <h3>
+                                ${escapeHTML(area.name)}
+                            </h3>
+
+                            <p>
+                                ${escapeHTML(area.description)}
+                            </p>
+
+                            <div class="area-meta">
+
+                                <span class="meta-pill">
+                                    ${area.subAreas.length}
+                                    مناطق فرعية
+                                </span>
+
+                                <span class="meta-pill">
+                                    ${propertyCount}
+                                    عقار
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                `;
+
+            });
+
+        }
+
+
+        /* =========================================================
+           OPEN MAIN AREA
+        ========================================================= */
+
+        function openMainArea(id) {
+
+            const area =
+                data.find(item => item.id === id);
+
+            if (!area) return;
+
+            currentMainId = id;
+            currentSubId = null;
+
+            hideViews();
+
+            document
+                .getElementById("mainAreaView")
+                .classList.add("active");
+
+            document
+                .getElementById("mainAreaTitle")
+                .textContent = area.name;
+
+            document
+                .getElementById("mainAreaDescription")
+                .textContent =
+                area.description || "";
+
+            renderMainArea();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================================================
+           RENDER MAIN AREA
+        ========================================================= */
+
+        function renderMainArea() {
+
+            const area =
+                data.find(
+                    item => item.id === currentMainId
+                );
+
+            if (!area) return;
+
+            let propertyCount = 0;
+
+            area.subAreas.forEach(sub => {
+
+                propertyCount +=
+                    sub.properties.length;
+
+            });
+
+            document
+                .getElementById("subCount")
+                .textContent =
+                area.subAreas.length;
+
+            document
+                .getElementById("mainPropertyCount")
+                .textContent =
+                propertyCount;
+
+
+            const grid =
+                document.getElementById("subAreasGrid");
+
+            grid.innerHTML = "";
+
+
+            if (area.subAreas.length === 0) {
+
+                grid.innerHTML = `
+
+                    <div class="empty"
+                         style="grid-column:1/-1">
+
+                        <div class="empty-icon">
+                            ◇
+                        </div>
+
+                        <h3>
+                            لا توجد مناطق فرعية حتى الآن
+                        </h3>
+
+                        <p>
+                            ابدئي بإضافة أول منطقة فرعية
+                            داخل ${escapeHTML(area.name)}
+                        </p>
+
+                        <button
+                            class="primary-btn"
+                            onclick="openSubModal()">
+                            + إضافة منطقة فرعية
+                        </button>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            area.subAreas.forEach(sub => {
+
+                grid.innerHTML += `
+
+                    <article
+                        class="sub-card"
+                        onclick="openSubArea('${sub.id}')">
+
+                        <div class="sub-icon">
+                            ◇
+                        </div>
+
+                        <h3>
+                            ${escapeHTML(sub.name)}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                sub.description ||
+                                "منطقة فرعية"
+                            )}
+                        </p>
+
+                        <div class="sub-card-bottom">
+
+                            <span>
+                                ${sub.properties.length}
+                                عقار
+                            </span>
+
+                            <button
+                                class="delete-mini"
+                                onclick="
+                                    event.stopPropagation();
+                                    deleteSubArea('${sub.id}')
+                                ">
+                                ×
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                `;
+
+            });
+
+        }
+
+
+        /* =========================================================
+           SUB MODAL
+        ========================================================= */
+
+        function openSubModal() {
+
+            document
+                .getElementById("subName")
+                .value = "";
+
+            document
+                .getElementById("subDescription")
+                .value = "";
+
+            document
+                .getElementById("subModal")
+                .classList.add("show");
+
+        }
+
+
+        function saveSubArea() {
+
+            const name =
+                document
+                    .getElementById("subName")
+                    .value
+                    .trim();
+
+            const description =
+                document
+                    .getElementById("subDescription")
+                    .value
+                    .trim();
+
+
+            if (!name) {
+
+                showToast(
+                    "اكتبي اسم المنطقة الفرعية أولاً"
+                );
+
+                return;
+
+            }
+
+
+            const area =
+                data.find(
+                    item => item.id === currentMainId
+                );
+
+            if (!area) return;
+
+
+            area.subAreas.push({
+
+                id:
+                    "sub_" +
+                    Date.now(),
+
+                name,
+
+                description,
+
+                properties: []
+
+            });
+
+
+            saveData();
+
+            closeModal("subModal");
+
+            renderMainArea();
+
+            renderAreas();
+
+            showToast(
+                "تمت إضافة المنطقة الفرعية بنجاح"
+            );
+
+        }
+
+
+        /* =========================================================
+           DELETE SUB
+        ========================================================= */
+
+        function deleteSubArea(id) {
+
+            const area =
+                data.find(
+                    item => item.id === currentMainId
+                );
+
+            if (!area) return;
+
+
+            const sub =
+                area.subAreas.find(
+                    item => item.id === id
+                );
+
+            if (!sub) return;
+
+
+            const confirmed =
+                confirm(
+                    "هل أنتِ متأكدة من حذف المنطقة الفرعية وكل العقارات الموجودة بداخلها؟"
+                );
+
+
+            if (!confirmed) return;
+
+
+            area.subAreas =
+                area.subAreas.filter(
+                    item => item.id !== id
+                );
+
+
+            saveData();
+
+            renderMainArea();
+
+            renderAreas();
+
+            showToast(
+                "تم حذف المنطقة الفرعية"
+            );
+
+        }
+
+
+        /* =========================================================
+           OPEN SUB AREA
+        ========================================================= */
+
+        function openSubArea(id) {
+
+            const area =
+                data.find(
+                    item => item.id === currentMainId
+                );
+
+            if (!area) return;
+
+
+            const sub =
+                area.subAreas.find(
+                    item => item.id === id
+                );
+
+            if (!sub) return;
+
+
+            currentSubId = id;
+
+
+            hideViews();
+
+            document
+                .getElementById("subAreaView")
+                .classList.add("active");
+
+
+            document
+                .getElementById("subAreaTitle")
+                .textContent =
+                sub.name;
+
+
+            document
+                .getElementById("subAreaDescription")
+                .textContent =
+                sub.description || "";
+
+
+            document
+                .getElementById("subAreaStatName")
+                .textContent =
+                sub.name;
+
+
+            document
+                .getElementById("subPropertyCount")
+                .textContent =
+                sub.properties.length;
+
+
+            renderProperties();
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================================================
+           BACK
+        ========================================================= */
+
+        function backToMainArea() {
+
+            if (currentMainId) {
+
+                openMainArea(
+                    currentMainId
+                );
+
+            } else {
+
+                goHome();
+
+            }
+
+        }
+
+
+        /* =========================================================
+           PROPERTY MODAL
+        ========================================================= */
+
+        function openPropertyModal() {
+
+            document
+                .getElementById("propertyForm")
+                .reset();
+
+            document
+                .getElementById("propertyModal")
+                .classList.add("show");
+
+        }
+
+
+        /* =========================================================
+           SAVE PROPERTY
+        ========================================================= */
+
+        function saveProperty() {
+
+            const title =
+                document
+                    .getElementById("p_title")
+                    .value
+                    .trim();
+
+
+            if (!title) {
+
+                showToast(
+                    "اسم العقار مطلوب"
+                );
+
+                return;
+
+            }
+
+
+            const area =
+                data.find(
+                    item => item.id === currentMainId
+                );
+
+            if (!area) return;
+
+
+            const sub =
+                area.subAreas.find(
+                    item => item.id === currentSubId
+                );
+
+            if (!sub) return;
+
+
+            const property = {
+
+                id:
+                    "property_" +
+                    Date.now(),
+
+                title,
+
+                type:
+                    val("p_type"),
+
+                purpose:
+                    val("p_purpose"),
+
+                status:
+                    val("p_status"),
+
+                price:
+                    val("p_price"),
+
+                meterPrice:
+                    val("p_meterPrice"),
+
+                rent:
+                    val("p_rent"),
+
+                deposit:
+                    val("p_deposit"),
+
+                payment:
+                    val("p_payment"),
+
+                negotiable:
+                    val("p_negotiable"),
+
+                area:
+                    val("p_area"),
+
+                land:
+                    val("p_land"),
+
+                bedrooms:
+                    val("p_bedrooms"),
+
+                bathrooms:
+                    val("p_bathrooms"),
+
+                reception:
+                    val("p_reception"),
+
+                kitchens:
+                    val("p_kitchens"),
+
+                balconies:
+                    val("p_balconies"),
+
+                storage:
+                    val("p_storage"),
+
+                floor:
+                    val("p_floor"),
+
+                buildingFloors:
+                    val("p_buildingFloors"),
+
+                year:
+                    val("p_year"),
+
+                unitsPerFloor:
+                    val("p_unitsPerFloor"),
+
+                finish:
+                    val("p_finish"),
+
+                direction:
+                    val("p_direction"),
+
+                address:
+                    val("p_address"),
+
+                street:
+                    val("p_street"),
+
+                buildingNumber:
+                    val("p_buildingNumber"),
+
+                apartmentNumber:
+                    val("p_apartmentNumber"),
+
+                landmark:
+                    val("p_landmark"),
+
+                owner:
+                    val("p_owner"),
+
+                phone:
+                    val("p_phone"),
+
+                whatsapp:
+                    val("p_whatsapp"),
+
+                phone2:
+                    val("p_phone2"),
+
+                description:
+                    val("p_description"),
+
+                advantages:
+                    val("p_advantages"),
+
+                notes:
+                    val("p_notes"),
+
+                image:
+                    val("p_image"),
+
+                video:
+                    val("p_video"),
+
+
+                features: {
+
+                    elevator:
+                        checked("f_elevator"),
+
+                    parking:
+                        checked("f_parking"),
+
+                    balcony:
+                        checked("f_balcony"),
+
+                    security:
+                        checked("f_security"),
+
+                    camera:
+                        checked("f_camera"),
+
+                    gas:
+                        checked("f_gas"),
+
+                    water:
+                        checked("f_water"),
+
+                    electric:
+                        checked("f_electric"),
+
+                    meter:
+                        checked("f_meter"),
+
+                    internet:
+                        checked("f_internet"),
+
+                    ac:
+                        checked("f_ac"),
+
+                    furnished:
+                        checked("f_furnished"),
+
+                    roof:
+                        checked("f_roof"),
+
+                    garden:
+                        checked("f_garden"),
+
+                    pool:
+                        checked("f_pool"),
+
+                    club:
+                        checked("f_club")
+
+                },
+
+                createdAt:
+                    new Date().toISOString()
+
+            };
+
+
+            sub.properties.push(
+                property
+            );
+
+
+            saveData();
+
+            closeModal(
+                "propertyModal"
+            );
+
+            renderProperties();
+
+            renderMainArea();
+
+            renderAreas();
+
+
+            showToast(
+                "تم حفظ العقار بنجاح"
+            );
+
+        }
+
+
+        /* =========================================================
+           HELPERS
+        ========================================================= */
+
+        function val(id) {
+
+            const element =
+                document.getElementById(id);
+
+            return element
+                ? element.value.trim()
+                : "";
+
+        }
+
+
+        function checked(id) {
+
+            const element =
+                document.getElementById(id);
+
+            return element
+                ? element.checked
+                : false;
+
+        }
+
+
+        /* =========================================================
+           RENDER PROPERTIES
+        ========================================================= */
+
+        function renderProperties() {
+
+            const area =
+                data.find(
+                    item => item.id === currentMainId
+                );
+
+            if (!area) return;
+
+
+            const sub =
+                area.subAreas.find(
+                    item => item.id === currentSubId
+                );
+
+            if (!sub) return;
+
+
+            const grid =
+                document.getElementById(
+                    "propertiesGrid"
+                );
+
+
+            document
+                .getElementById(
+                    "subPropertyCount"
+                )
+                .textContent =
+                sub.properties.length;
+
+
+            grid.innerHTML = "";
+
+
+            if (sub.properties.length === 0) {
+
+                grid.innerHTML = `
+
+                    <div
+                        class="empty"
+                        style="grid-column:1/-1">
+
+                        <div class="empty-icon">
+                            ◇
+                        </div>
+
+                        <h3>
+                            لا توجد عقارات حتى الآن
+                        </h3>
+
+                        <p>
+                            أضيفي أول شقة أو عقار
+                            داخل ${escapeHTML(sub.name)}
+                        </p>
+
+                        <button
+                            class="primary-btn"
+                            onclick="openPropertyModal()">
+                            + إضافة عقار
+                        </button>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            sub.properties.forEach(property => {
+
+                const image =
+                    property.image ||
+                    "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1000&q=85";
+
+
+                grid.innerHTML += `
+
+                    <article
+                        class="property-card">
+
+                        <div class="property-image">
+
+                            <img
+                                src="${escapeHTML(image)}"
+                                alt="${escapeHTML(property.title)}">
+
+                            <span
+                                class="property-status">
+
+                                ${escapeHTML(
+                                    property.status ||
+                                    "متاح"
+                                )}
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="property-body">
+
+                            <h3>
+                                ${escapeHTML(property.title)}
+                            </h3>
+
+                            <div class="property-price">
+
+                                ${formatPrice(
+                                    property.price
+                                )}
+
+                            </div>
+
+
+                            <div class="property-info">
+
+                                ${
+                                    property.area
+                                    ?
+                                    `<span>
+                                        ${escapeHTML(property.area)}
+                                        م²
+                                    </span>`
+                                    :
+                                    ""
+                                }
+
+                                ${
+                                    property.bedrooms
+                                    ?
+                                    `<span>
+                                        ${escapeHTML(property.bedrooms)}
+                                        غرف
+                                    </span>`
+                                    :
+                                    ""
+                                }
+
+                                ${
+                                    property.bathrooms
+                                    ?
+                                    `<span>
+                                        ${escapeHTML(property.bathrooms)}
+                                        حمام
+                                    </span>`
+                                    :
+                                    ""
+                                }
+
+                                ${
+                                    property.floor
+                                    ?
+                                    `<span>
+                                        الدور ${escapeHTML(property.floor)}
+                                    </span>`
+                                    :
+                                    ""
+                                }
+
+                            </div>
+
+
+                            <div
+                                class="property-buttons">
+
+                                <button
+                                    onclick="
+                                        openDetails('${property.id}')
+                                    ">
+                                    التفاصيل
+                                </button>
+
+                                <button
+                                    class="danger"
+                                    onclick="
+                                        deleteProperty('${property.id}')
+                                    ">
+                                    حذف
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                `;
+
+            });
+
+        }
+
+
+        /* =========================================================
+           PROPERTY DETAILS
+        ========================================================= */
+
+        function openDetails(id) {
+
+            const area =
+                data.find(
+                    item => item.id === currentMainId
+                );
+
+            if (!area) return;
+
+
+            const sub =
+                area.subAreas.find(
+                    item => item.id === currentSubId
+                );
+
+            if (!sub) return;
+
+
+            const property =
+                sub.properties.find(
+                    item => item.id === id
+                );
+
+            if (!property) return;
+
+
+            document
+                .getElementById("detailsTitle")
+                .textContent =
+                property.title;
+
+
+            let html = "";
+
+
+            if (property.image) {
+
+                html += `
+
+                    <img
+                        class="details-image"
+                        src="${escapeHTML(property.image)}"
+                        alt="">
+
+                `;
+
+            }
+
+
+            const details = [
+
+                ["نوع العقار", property.type],
+                ["الغرض", property.purpose],
+                ["الحالة", property.status],
+                ["السعر", property.price ? formatPrice(property.price) : ""],
+                ["سعر المتر", property.meterPrice],
+                ["الإيجار الشهري", property.rent],
+                ["مقدم الحجز", property.deposit],
+                ["طريقة الدفع", property.payment],
+                ["قابل للتفاوض", property.negotiable],
+                ["المساحة", property.area ? property.area + " م²" : ""],
+                ["مساحة الأرض", property.land],
+                ["غرف النوم", property.bedrooms],
+                ["الحمامات", property.bathrooms],
+                ["الريسبشن", property.reception],
+                ["المطابخ", property.kitchens],
+                ["البلكونات", property.balconies],
+                ["التخزين", property.storage],
+                ["الدور", property.floor],
+                ["أدوار المبنى", property.buildingFloors],
+                ["سنة البناء", property.year],
+                ["الشقق في الدور", property.unitsPerFloor],
+                ["التشطيب", property.finish],
+                ["الاتجاه", property.direction],
+                ["اسم الشارع", property.street],
+                ["رقم العمارة", property.buildingNumber],
+                ["رقم الشقة", property.apartmentNumber],
+                ["أقرب معلم", property.landmark],
+                ["المالك / المسؤول", property.owner],
+                ["الهاتف", property.phone],
+                ["واتساب", property.whatsapp],
+                ["هاتف إضافي", property.phone2]
+
+            ];
+
+
+            const filtered =
+                details.filter(
+                    item =>
+                        item[1] !== undefined &&
+                        item[1] !== null &&
+                        String(item[1]).trim() !== ""
+                );
+
+
+            if (filtered.length) {
+
+                html += `
+                    <div class="details-grid">
+                `;
+
+
+                filtered.forEach(item => {
+
+                    html += `
+
+                        <div class="detail-item">
+
+                            <small>
+                                ${escapeHTML(item[0])}
+                            </small>
+
+                            <strong>
+                                ${escapeHTML(item[1])}
+                            </strong>
+
+                        </div>
+
+                    `;
+
+                });
+
+
+                html += `
+                    </div>
+                `;
+
+            }
+
+
+            const featuresMap = {
+
+                elevator: "أسانسير",
+                parking: "جراج",
+                balcony: "بلكونة",
+                security: "أمن وحراسة",
+                camera: "كاميرات",
+                gas: "غاز طبيعي",
+                water: "مياه",
+                electric: "عداد كهرباء",
+                meter: "عداد مياه",
+                internet: "إنترنت",
+                ac: "تكييف",
+                furnished: "مفروش",
+                roof: "روف",
+                garden: "حديقة",
+                pool: "حمام سباحة",
+                club: "نادي"
+
+            };
+
+
+            const activeFeatures =
+                Object.keys(
+                    featuresMap
+                ).filter(
+                    key =>
+                        property.features &&
+                        property.features[key]
+                );
+
+
+            if (activeFeatures.length) {
+
+                html += `
+
+                    <div class="details-text">
+
+                        <strong
+                            style="color:#e8cb88">
+                            المميزات:
+                        </strong>
+
+                        <br><br>
+
+                        ${activeFeatures
+                            .map(
+                                key =>
+                                    "◆ " +
+                                    featuresMap[key]
+                            )
+                            .join(" &nbsp; ")}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            if (property.address) {
+
+                html += `
+
+                    <div class="details-text">
+
+                        <strong
+                            style="color:#e8cb88">
+                            العنوان
+                        </strong>
+
+                        <br><br>
+
+                        ${escapeHTML(
+                            property.address
+                        )}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            if (property.description) {
+
+                html += `
+
+                    <div class="details-text">
+
+                        <strong
+                            style="color:#e8cb88">
+                            وصف العقار
+                        </strong>
+
+                        <br><br>
+
+                        ${escapeHTML(
+                            property.description
+                        )}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            if (property.advantages) {
+
+                html += `
+
+                    <div class="details-text">
+
+                        <strong
+                            style="color:#e8cb88">
+                            أهم المميزات
+                        </strong>
+
+                        <br><br>
+
+                        ${escapeHTML(
+                            property.advantages
+                        )}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            if (property.notes) {
+
+                html += `
+
+                    <div class="details-text">
+
+                        <strong
+                            style="color:#ffadad">
+                            ملاحظات / عيوب
+                        </strong>
+
+                        <br><br>
+
+                        ${escapeHTML(
+                            property.notes
+                        )}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            if (property.video) {
+
+                html += `
+
+                    <div
+                        style="margin-top:18px">
+
+                        <a
+                            href="${escapeHTML(property.video)}"
+                            target="_blank"
+                            class="primary-btn"
+                            style="
+                                display:inline-flex;
+                                align-items:center;
+                                text-decoration:none;
+                            ">
+
+                            مشاهدة فيديو العقار
+
+                        </a>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            document
+                .getElementById(
+                    "detailsContent"
+                )
+                .innerHTML = html;
+
+
+            document
+                .getElementById(
+                    "detailsModal"
+                )
+                .classList.add("show");
+
+        }
+
+
+        /* =========================================================
+           DELETE PROPERTY
+        ========================================================= */
+
+        function deleteProperty(id) {
+
+            const area =
+                data.find(
+                    item => item.id === currentMainId
+                );
+
+            if (!area) return;
+
+
+            const sub =
+                area.subAreas.find(
+                    item => item.id === currentSubId
+                );
+
+            if (!sub) return;
+
+
+            const confirmed =
+                confirm(
+                    "هل أنتِ متأكدة من حذف هذا العقار؟"
+                );
+
+
+            if (!confirmed) return;
+
+
+            sub.properties =
+                sub.properties.filter(
+                    item => item.id !== id
+                );
+
+
+            saveData();
+
+            renderProperties();
+
+            renderMainArea();
+
+            renderAreas();
+
+            showToast(
+                "تم حذف العقار"
+            );
+
+        }
+
+
+        /* =========================================================
+           MAIN AREA ADD
+        ========================================================= */
+
+        function openMainAddModal() {
+
+            document
+                .getElementById("mainName")
+                .value = "";
+
+            document
+                .getElementById("mainDescription")
+                .value = "";
+
+            document
+                .getElementById("mainModal")
+                .classList.add("show");
+
+        }
+
+
+        function saveMainArea() {
+
+            const name =
+                document
+                    .getElementById("mainName")
+                    .value
+                    .trim();
+
+
+            const description =
+                document
+                    .getElementById("mainDescription")
+                    .value
+                    .trim();
+
+
+            if (!name) {
+
+                showToast(
+                    "اكتبي اسم المنطقة"
+                );
+
+                return;
+
+            }
+
+
+            data.push({
+
+                id:
+                    "main_" +
+                    Date.now(),
+
+                name,
+
+                description,
+
+                image:
+                    "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1000&q=85",
+
+                subAreas: []
+
+            });
+
+
+            saveData();
+
+            closeModal("mainModal");
+
+            renderAreas();
+
+            showToast(
+                "تمت إضافة المنطقة"
+            );
+
+        }
+
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        function closeModal(id) {
+
+            document
+                .getElementById(id)
+                .classList.remove("show");
+
+        }
+
+
+        document
+            .querySelectorAll(".modal")
+            .forEach(modal => {
+
+                modal.addEventListener(
+                    "click",
+                    function(event) {
+
+                        if (
+                            event.target === modal
+                        ) {
+
+                            modal.classList.remove(
+                                "show"
+                            );
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        function showToast(message) {
+
+            const toast =
+                document.getElementById(
+                    "toast"
+                );
+
+            toast.textContent =
+                message;
+
+            toast.classList.add("show");
+
+
+            setTimeout(() => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            }, 3000);
+
+        }
+
+
+        /* =========================================================
+           SEARCH
+        ========================================================= */
+
+        const searchInput =
+            document.getElementById(
+                "searchInput"
+            );
+
+        const searchResults =
+            document.getElementById(
+                "searchResults"
+            );
+
+
+        searchInput.addEventListener(
+            "input",
+            function() {
+
+                const query =
+                    this.value
+                        .trim()
+                        .toLowerCase();
+
+
+                if (!query) {
+
+                    searchResults.classList.remove(
+                        "show"
+                    );
+
+                    return;
+
+                }
+
+
+                const results = [];
+
+
+                /* MAIN AREAS */
+
+                data.forEach(area => {
+
+                    if (
+                        area.name
+                            .toLowerCase()
+                            .includes(query)
+                    ) {
+
+                        results.push({
+
+                            type:
+                                "منطقة رئيسية",
+
+                            title:
+                                area.name,
+
+                            subtitle:
+                                area.description,
+
+                            action:
+                                () => {
+
+                                    searchResults
+                                        .classList.remove(
+                                            "show"
+                                        );
+
+                                    searchInput.value =
+                                        "";
+
+                                    openMainArea(
+                                        area.id
+                                    );
+
+                                }
+
+                        });
+
+                    }
+
+
+                    /* SUB AREAS */
+
+                    area.subAreas.forEach(sub => {
+
+                        if (
+                            sub.name
+                                .toLowerCase()
+                                .includes(query)
+                        ) {
+
+                            results.push({
+
+                                type:
+                                    "منطقة فرعية",
+
+                                title:
+                                    sub.name,
+
+                                subtitle:
+                                    area.name,
+
+                                action:
+                                    () => {
+
+                                        searchResults
+                                            .classList.remove(
+                                                "show"
+                                            );
+
+                                        searchInput.value =
+                                            "";
+
+                                        openMainArea(
+                                            area.id
+                                        );
+
+                                        setTimeout(
+                                            () => {
+
+                                                openSubArea(
+                                                    sub.id
+                                                );
+
+                                            },
+                                            100
+                                        );
+
+                                    }
+
+                            });
+
+                        }
+
+
+                        /* PROPERTIES */
+
+                        sub.properties.forEach(
+                            property => {
+
+                                const text =
+                                    [
+
+                                        property.title,
+                                        property.type,
+                                        property.purpose,
+                                        property.status,
+                                        property.address,
+                                        property.street,
+                                        property.landmark,
+                                        property.owner
+
+                                    ]
+                                    .filter(Boolean)
+                                    .join(" ")
+                                    .toLowerCase();
+
+
+                                if (
+                                    text.includes(
+                                        query
+                                    )
+                                ) {
+
+                                    results.push({
+
+                                        type:
+                                            "عقار / شقة",
+
+                                        title:
+                                            property.title,
+
+                                        subtitle:
+                                            area.name +
+                                            " ← " +
+                                            sub.name,
+
+                                        propertyId:
+                                            property.id,
+
+                                        areaId:
+                                            area.id,
+
+                                        subId:
+                                            sub.id
+
+                                    });
+
+                                }
+
+                            }
+                        );
+
+                    });
+
+                });
+
+
+                searchResults.innerHTML = `
+
+                    <div class="search-title">
+                        نتائج البحث
+                    </div>
+
+                `;
+
+
+                if (!results.length) {
+
+                    searchResults.innerHTML += `
+
+                        <div class="no-search">
+
+                            لا توجد نتائج لـ
+                            "<strong>
+                                ${escapeHTML(query)}
+                            </strong>"
+
+                        </div>
+
+                    `;
+
+                    searchResults.classList.add(
+                        "show"
+                    );
+
+                    return;
+
+                }
+
+
+                results
+                    .slice(0, 15)
+                    .forEach(result => {
+
+                        const item =
+                            document.createElement(
+                                "div"
+                            );
+
+                        item.className =
+                            "search-result";
+
+
+                        item.innerHTML = `
+
+                            <div class="result-icon">
+
+                                ${
+                                    result.type ===
+                                    "عقار / شقة"
+                                    ? "⌂"
+                                    : "◇"
+                                }
+
+                            </div>
+
+                            <div class="result-info">
+
+                                <strong>
+                                    ${escapeHTML(
+                                        result.title
+                                    )}
+                                </strong>
+
+                                <span>
+
+                                    ${escapeHTML(
+                                        result.type
+                                    )}
+
+                                    ${
+                                        result.subtitle
+                                        ?
+                                        " • " +
+                                        escapeHTML(
+                                            result.subtitle
+                                        )
+                                        :
+                                        ""
+                                    }
+
+                                </span>
+
+                            </div>
+
+                        `;
+
+
+                        item.addEventListener(
+                            "click",
+                            function() {
+
+                                searchResults
+                                    .classList.remove(
+                                        "show"
+                                    );
+
+                                searchInput.value =
+                                    "";
+
+
+                                if (
+                                    result.type ===
+                                    "منطقة رئيسية"
+                                ) {
+
+                                    openMainArea(
+                                        result.action
+                                            ? data.find(
+                                                a =>
+                                                    a.name ===
+                                                    result.title
+                                            )?.id
+                                            : null
+                                    );
+
+                                    return;
+
+                                }
+
+
+                                if (
+                                    result.type ===
+                                    "منطقة فرعية"
+                                ) {
+
+                                    const area =
+                                        data.find(
+                                            a =>
+                                                a.name ===
+                                                result.subtitle
+                                        );
+
+                                    if (area) {
+
+                                        openMainArea(
+                                            area.id
+                                        );
+
+                                        setTimeout(
+                                            () => {
+
+                                                const sub =
+                                                    area.subAreas.find(
+                                                        s =>
+                                                            s.name ===
+                                                            result.title
+                                                    );
+
+                                                if (sub) {
+
+                                                    openSubArea(
+                                                        sub.id
+                                                    );
+
+                                                }
+
+                                            },
+                                            100
+                                        );
+
+                                    }
+
+                                    return;
+
+                                }
+
+
+                                if (
+                                    result.type ===
+                                    "عقار / شقة"
+                                ) {
+
+                                    openMainArea(
+                                        result.areaId
+                                    );
+
+                                    setTimeout(
+                                        () => {
+
+                                            openSubArea(
+                                                result.subId
+                                            );
+
+                                            setTimeout(
+                                                () => {
+
+                                                    openDetails(
+                                                        result.propertyId
+                                                    );
+
+                                                },
+                                                150
+                                            );
+
+                                        },
+                                        100
+                                    );
+
+                                }
+
+                            }
+                        );
+
+
+                        searchResults.appendChild(
+                            item
+                        );
+
+                    });
+
+
+                searchResults.classList.add(
+                    "show"
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           CLOSE SEARCH OUTSIDE
+        ========================================================= */
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    !event.target.closest(
+                        ".nav-search"
+                    ) &&
+                    !event.target.closest(
+                        ".search-results"
+                    )
+                ) {
+
+                    searchResults.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           INITIAL
+        ========================================================= */
+
+        renderAreas();
+
+    </script>
+
+</body>
+
+</html>
